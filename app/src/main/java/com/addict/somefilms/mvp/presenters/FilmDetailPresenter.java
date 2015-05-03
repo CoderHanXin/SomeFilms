@@ -3,6 +3,7 @@ package com.addict.somefilms.mvp.presenters;
 import com.addict.common.BusProvider;
 import com.addict.domain.GetFilmDetailUsecaseController;
 import com.addict.model.entites.FilmDetail;
+import com.addict.model.entites.Images;
 import com.addict.model.rest.RestFilmSource;
 import com.addict.somefilms.mvp.views.FilmDetailView;
 import com.squareup.otto.Subscribe;
@@ -38,9 +39,14 @@ public class FilmDetailPresenter extends presenter {
     @Subscribe
     public void onFilmDetailReceived(FilmDetail response) {
         showContent(response.getTitle());
+        showFilmImage(response.getImages());
     }
 
     public void showContent(String content) {
         mFilmDetailView.setContent(content);
+    }
+
+    public void showFilmImage(Images images) {
+        mFilmDetailView.setFilmImage(images.getLarge());
     }
 }
