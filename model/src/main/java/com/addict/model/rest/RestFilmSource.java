@@ -2,10 +2,9 @@ package com.addict.model.rest;
 
 import com.addict.common.BusProvider;
 import com.addict.common.Constants;
-
 import com.addict.model.FilmDataSource;
 import com.addict.model.entites.FilmDetail;
-
+import com.addict.model.entites.FilmWrapper;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -46,6 +45,9 @@ public class RestFilmSource implements FilmDataSource {
             if (o instanceof FilmDetail) {
                 FilmDetail filmDetail = (FilmDetail) o;
                 BusProvider.getRestBusInstance().post(filmDetail);
+            }else if (o instanceof FilmWrapper) {
+                FilmWrapper filmWrapper = (FilmWrapper) o;
+                BusProvider.getRestBusInstance().post(filmWrapper);
             }
         }
 
@@ -54,4 +56,9 @@ public class RestFilmSource implements FilmDataSource {
             System.out.printf("[DEBUG] RestFilmSource failure - " + error.getMessage());
         }
     };
+
+    @Override
+    public void getFilmsByPage(int start) {
+        filmDatabaseApi.getTopFilmsByPage(Constants.API_KEY, start + "", retrofitCallback);
+    }
 }

@@ -6,4 +6,6 @@ package com.addict.model;
 public interface FilmDataSource {
 
     public void getFilmDetail(String id);
+
+    public void getFilmsByPage(int start);
 }

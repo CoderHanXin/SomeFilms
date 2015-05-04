@@ -1,8 +1,10 @@
-package views.activities;
+package com.addict.somefilms.views.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.addict.somefilms.R;
@@ -50,6 +52,11 @@ public class FilmDetailActivity extends Activity implements FilmDetailView {
 
     @Override
     public void setFilmImage(String url) {
-        Picasso.with(this).load(url).fit().into(mImage);
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int height = displaymetrics.heightPixels;
+        int width = displaymetrics.widthPixels;
+        mImage.setLayoutParams(new LinearLayout.LayoutParams(width,height/3));
+        Picasso.with(this).load(url).fit().centerCrop().into(mImage);
     }
 }

@@ -9,7 +9,7 @@ public interface GetFilmDetailUsecase extends Usecase {
 
     public void requestFilmDetail(String filmId);
 
-    public void onFilmDetailResponse(FilmDetail reponse);
+    public void onFilmDetailResponse(FilmDetail response);
 
     public void sendFilmDetailToPresenter(FilmDetail response);
 }

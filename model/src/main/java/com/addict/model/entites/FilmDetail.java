@@ -16,13 +16,13 @@ public class FilmDetail {
     private Rating rating;
     @SerializedName("reviews_count")
     @Expose
-    private Integer reviewsCount;
+    private Number reviewsCount;
     @SerializedName("wish_count")
     @Expose
-    private Integer wishCount;
+    private Number wishCount;
     @SerializedName("collect_count")
     @Expose
-    private Integer collectCount;
+    private Number collectCount;
     @SerializedName("douban_site")
     @Expose
     private String doubanSite;
@@ -41,16 +41,16 @@ public class FilmDetail {
     private String title;
     @SerializedName("do_count")
     @Expose
-    private Object doCount;
+    private Number doCount;
     @SerializedName("seasons_count")
     @Expose
-    private Object seasonsCount;
+    private Number seasonsCount;
     @SerializedName("schedule_url")
     @Expose
     private String scheduleUrl;
     @SerializedName("episodes_count")
     @Expose
-    private Object episodesCount;
+    private Number episodesCount;
     @Expose
     private List<String> genres = new ArrayList<String>();
     @Expose
@@ -59,7 +59,7 @@ public class FilmDetail {
     private List<Cast> casts = new ArrayList<Cast>();
     @SerializedName("current_season")
     @Expose
-    private Object currentSeason;
+    private Number currentSeason;
     @SerializedName("original_title")
     @Expose
     private String originalTitle;
@@ -71,10 +71,10 @@ public class FilmDetail {
     private List<Director> directors = new ArrayList<Director>();
     @SerializedName("comments_count")
     @Expose
-    private Integer commentsCount;
+    private Number commentsCount;
     @SerializedName("ratings_count")
     @Expose
-    private Integer ratingsCount;
+    private Number ratingsCount;
     @Expose
     private List<String> aka = new ArrayList<String>();
 
@@ -101,7 +101,7 @@ public class FilmDetail {
      * @return
      *     The reviewsCount
      */
-    public Integer getReviewsCount() {
+    public Number getReviewsCount() {
         return reviewsCount;
     }
 
@@ -110,7 +110,7 @@ public class FilmDetail {
      * @param reviewsCount
      *     The reviews_count
      */
-    public void setReviewsCount(Integer reviewsCount) {
+    public void setReviewsCount(Number reviewsCount) {
         this.reviewsCount = reviewsCount;
     }
 
@@ -119,7 +119,7 @@ public class FilmDetail {
      * @return
      *     The wishCount
      */
-    public Integer getWishCount() {
+    public Number getWishCount() {
         return wishCount;
     }
 
@@ -128,7 +128,7 @@ public class FilmDetail {
      * @param wishCount
      *     The wish_count
      */
-    public void setWishCount(Integer wishCount) {
+    public void setWishCount(Number wishCount) {
         this.wishCount = wishCount;
     }
 
@@ -137,7 +137,7 @@ public class FilmDetail {
      * @return
      *     The collectCount
      */
-    public Integer getCollectCount() {
+    public Number getCollectCount() {
         return collectCount;
     }
 
@@ -146,7 +146,7 @@ public class FilmDetail {
      * @param collectCount
      *     The collect_count
      */
-    public void setCollectCount(Integer collectCount) {
+    public void setCollectCount(Number collectCount) {
         this.collectCount = collectCount;
     }
 
@@ -281,7 +281,7 @@ public class FilmDetail {
      * @return
      *     The doCount
      */
-    public Object getDoCount() {
+    public Number getDoCount() {
         return doCount;
     }
 
@@ -290,7 +290,7 @@ public class FilmDetail {
      * @param doCount
      *     The do_count
      */
-    public void setDoCount(Object doCount) {
+    public void setDoCount(Number doCount) {
         this.doCount = doCount;
     }
 
@@ -299,7 +299,7 @@ public class FilmDetail {
      * @return
      *     The seasonsCount
      */
-    public Object getSeasonsCount() {
+    public Number getSeasonsCount() {
         return seasonsCount;
     }
 
@@ -308,7 +308,7 @@ public class FilmDetail {
      * @param seasonsCount
      *     The seasons_count
      */
-    public void setSeasonsCount(Object seasonsCount) {
+    public void setSeasonsCount(Number seasonsCount) {
         this.seasonsCount = seasonsCount;
     }
 
@@ -335,7 +335,7 @@ public class FilmDetail {
      * @return
      *     The episodesCount
      */
-    public Object getEpisodesCount() {
+    public Number getEpisodesCount() {
         return episodesCount;
     }
 
@@ -344,7 +344,7 @@ public class FilmDetail {
      * @param episodesCount
      *     The episodes_count
      */
-    public void setEpisodesCount(Object episodesCount) {
+    public void setEpisodesCount(Number episodesCount) {
         this.episodesCount = episodesCount;
     }
 
@@ -407,7 +407,7 @@ public class FilmDetail {
      * @return
      *     The currentSeason
      */
-    public Object getCurrentSeason() {
+    public Number getCurrentSeason() {
         return currentSeason;
     }
 
@@ -416,7 +416,7 @@ public class FilmDetail {
      * @param currentSeason
      *     The current_season
      */
-    public void setCurrentSeason(Object currentSeason) {
+    public void setCurrentSeason(Number currentSeason) {
         this.currentSeason = currentSeason;
     }
 
@@ -497,7 +497,7 @@ public class FilmDetail {
      * @return
      *     The commentsCount
      */
-    public Integer getCommentsCount() {
+    public Number getCommentsCount() {
         return commentsCount;
     }
 
@@ -506,7 +506,7 @@ public class FilmDetail {
      * @param commentsCount
      *     The comments_count
      */
-    public void setCommentsCount(Integer commentsCount) {
+    public void setCommentsCount(Number commentsCount) {
         this.commentsCount = commentsCount;
     }
 
@@ -515,7 +515,7 @@ public class FilmDetail {
      * @return
      *     The ratingsCount
      */
-    public Integer getRatingsCount() {
+    public Number getRatingsCount() {
         return ratingsCount;
     }
 
@@ -524,7 +524,7 @@ public class FilmDetail {
      * @param ratingsCount
      *     The ratings_count
      */
-    public void setRatingsCount(Integer ratingsCount) {
+    public void setRatingsCount(Number ratingsCount) {
         this.ratingsCount = ratingsCount;
     }
 
