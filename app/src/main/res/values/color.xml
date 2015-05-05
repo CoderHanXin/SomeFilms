@@ -15,15 +15,15 @@
   ~ limitations under the License.
   -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:id="@+id/item_film"
-             android:layout_margin="@dimen/spacing_tiny"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
-    <ImageView
-        android:id="@+id/imageView_film_cover"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        />
-</FrameLayout>
+<resources>
+    <color name="primary">#607D8B</color>
+    <color name="primary_dark">#455A64</color>
+    <color name="primary_light">#CFD8DC</color>
+    <color name="accent">#FF9800</color>
+    <color name="secondary_accent">#FFC107</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="brand_text">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+    <color name="background">#ffeeeeee</color>
+</resources>
