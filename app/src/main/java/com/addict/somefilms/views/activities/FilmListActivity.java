@@ -25,6 +25,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ProgressBar;
 
 import com.addict.model.entites.Film;
 import com.addict.somefilms.R;
@@ -45,6 +46,8 @@ public class FilmListActivity extends AppCompatActivity implements FilmsView {
     RecyclerView mRecycler;
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;
+    @InjectView(R.id.film_list_progressBar)
+    ProgressBar mProgressBar;
 
     public final static String EXTRA_FILM_ID = "film_id";
 
@@ -105,6 +108,18 @@ public class FilmListActivity extends AppCompatActivity implements FilmsView {
     }
 
     @Override
+    public void showLoading() {
+
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+
+        mProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
     public void showFilms(List<Film> filmList) {
         mAdapter = new FilmsRecyclerAdapter(filmList);
         mRecycler.setAdapter(mAdapter);
@@ -127,6 +142,16 @@ public class FilmListActivity extends AppCompatActivity implements FilmsView {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
+
+
+            int visibleItemCount    = mRecycler.getLayoutManager().getChildCount();
+            int totalItemCount      = mRecycler.getLayoutManager().getItemCount();
+            int pastVisibleItems    = ((GridLayoutManager) mRecycler.getLayoutManager())
+                    .findFirstVisibleItemPosition();
+
+            if((visibleItemCount + pastVisibleItems) >= totalItemCount && !mFilmsPresenter.isLoading()) {
+                mFilmsPresenter.onEndListReached();
+            }
 
             // Is scrolling up
             if (dy > 10) {

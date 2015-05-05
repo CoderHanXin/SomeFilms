@@ -39,4 +39,12 @@
         >
     </android.support.v7.widget.Toolbar>
 
+    <ProgressBar
+        android:id="@+id/film_list_progressBar"
+        android:layout_width="@dimen/view_size_large"
+        android:layout_height="@dimen/view_size_large"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        style="?android:attr/progressBarStyleLarge"
+        />
 </FrameLayout>
