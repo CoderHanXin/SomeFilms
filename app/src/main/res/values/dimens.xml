@@ -37,7 +37,7 @@
     <dimen name="view_size_normal">40dp</dimen>
     <dimen name="view_size_small">32dp</dimen>
 
-    <dimen name="list_item_height_normal">72dp</dimen>
-    <dimen name="list_item_height_small">48dp</dimen>
-    <dimen name="list_item_height_tiny">32dp</dimen>
+    <dimen name="item_height_normal">72dp</dimen>
+    <dimen name="item_height_small">48dp</dimen>
+    <dimen name="item_height_tiny">32dp</dimen>
 </resources>

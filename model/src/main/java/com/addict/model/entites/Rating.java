@@ -29,7 +29,7 @@ public class Rating implements Serializable {
     @Expose
     private Integer max;
     @Expose
-    private Double average;
+    private Float average;
     @Expose
     private String stars;
     @Expose
@@ -58,7 +58,7 @@ public class Rating implements Serializable {
      * @return
      *     The average
      */
-    public Double getAverage() {
+    public Float getAverage() {
         return average;
     }
 
@@ -67,7 +67,7 @@ public class Rating implements Serializable {
      * @param average
      *     The average
      */
-    public void setAverage(Double average) {
+    public void setAverage(Float average) {
         this.average = average;
     }
 
