@@ -47,7 +47,6 @@ public class GetFilmsUsecaseController implements GetFilmsUsecase {
     @Override
     public void sendFilmsToPresenter(FilmWrapper response) {
         mUiBus.post(response);
-        BusProvider.getRestBusInstance().unregister(this);
     }
 
     @Override

@@ -36,8 +36,6 @@ public class FilmsPresenter extends presenter {
     public FilmsPresenter(FilmsView filmsView) {
         mFilmsView = filmsView;
         mGetFilmsUsecaseController = new GetFilmsUsecaseController(BusProvider.getUIBusInstance(), RestFilmSource.getInstance());
-        mGetFilmsUsecaseController.execute();
-        mFilmsView.showLoading();
     }
 
     @Subscribe
@@ -46,6 +44,7 @@ public class FilmsPresenter extends presenter {
             mFilmsView.hideLoading();
             mFilmsView.showFilms(filmWrapper.getSubjects());
         } else {
+            mFilmsView.hideLoadingLabel();
             mFilmsView.appendFilms(filmWrapper.getSubjects());
         }
         isLoading =false;
@@ -53,6 +52,10 @@ public class FilmsPresenter extends presenter {
 
     @Override
     public void start() {
+        if (mFilmsView.isTheListEmpty()) {
+            mGetFilmsUsecaseController.execute();
+            mFilmsView.showLoading();
+        }
         BusProvider.getUIBusInstance().register(this);
     }
 
@@ -61,8 +64,9 @@ public class FilmsPresenter extends presenter {
         BusProvider.getUIBusInstance().unregister(this);
     }
 
-    public void onEndListReached() {
+    public void onEndless() {
         mGetFilmsUsecaseController.execute();
+        mFilmsView.showLoadingLabel();
         isLoading = true;
     }
 

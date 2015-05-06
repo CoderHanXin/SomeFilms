@@ -28,10 +28,13 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 
 import com.addict.model.entites.Film;
+import com.addict.model.entites.FilmWrapper;
 import com.addict.somefilms.R;
 import com.addict.somefilms.mvp.presenters.FilmsPresenter;
 import com.addict.somefilms.mvp.views.FilmsView;
 import com.addict.somefilms.views.adapters.FilmsRecyclerAdapter;
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.SnackbarManager;
 
 import java.util.List;
 
@@ -49,6 +52,7 @@ public class FilmListActivity extends AppCompatActivity implements FilmsView {
     @InjectView(R.id.film_list_progressBar)
     ProgressBar mProgressBar;
 
+    private final static String BUNDLE_FILM_WRAPPER = "film_wrapper";
     public final static String EXTRA_FILM_ID = "film_id";
 
     private FilmsPresenter mFilmsPresenter;
@@ -61,10 +65,15 @@ public class FilmListActivity extends AppCompatActivity implements FilmsView {
         ButterKnife.inject(this);
 
         initializeToolbar();
-
         initializeRecycler();
 
-        mFilmsPresenter = new FilmsPresenter(this);
+        if (savedInstanceState == null) {
+            mFilmsPresenter = new FilmsPresenter(this);
+        } else {
+            FilmWrapper filmWrapper = (FilmWrapper) savedInstanceState.getSerializable(BUNDLE_FILM_WRAPPER);
+            mFilmsPresenter.onTopFilmsReceived(filmWrapper);
+        }
+
     }
 
     private void initializeToolbar() {
@@ -74,6 +83,7 @@ public class FilmListActivity extends AppCompatActivity implements FilmsView {
 
     private void initializeRecycler() {
         mRecycler.setLayoutManager(new GridLayoutManager(this, 3));
+        mRecycler.setHasFixedSize(true);
         mRecycler.addOnScrollListener(recyclerScrollListener);
     }
 
@@ -93,6 +103,15 @@ public class FilmListActivity extends AppCompatActivity implements FilmsView {
 
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (mAdapter != null) {
+            outState.putSerializable(BUNDLE_FILM_WRAPPER, new FilmWrapper(mAdapter.getFilmList()));
+        }
     }
 
     @Override
@@ -120,6 +139,21 @@ public class FilmListActivity extends AppCompatActivity implements FilmsView {
     }
 
     @Override
+    public void showLoadingLabel() {
+
+        Snackbar moreFilmsSnackBar = Snackbar.with(this)
+                .text(R.string.message_loading_more_films)
+                .duration(Snackbar.SnackbarDuration.LENGTH_INDEFINITE)
+                .colorResource(R.color.primary);
+        SnackbarManager.show(moreFilmsSnackBar);
+    }
+
+    @Override
+    public void hideLoadingLabel() {
+        SnackbarManager.dismiss();
+    }
+
+    @Override
     public void showFilms(List<Film> filmList) {
         mAdapter = new FilmsRecyclerAdapter(filmList);
         mRecycler.setAdapter(mAdapter);
@@ -137,7 +171,8 @@ public class FilmListActivity extends AppCompatActivity implements FilmsView {
     }
 
     private RecyclerView.OnScrollListener recyclerScrollListener = new RecyclerView.OnScrollListener() {
-        public boolean flag;
+        private boolean flag;
+        private boolean firstLoading = true;
 
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -146,11 +181,16 @@ public class FilmListActivity extends AppCompatActivity implements FilmsView {
 
             int visibleItemCount    = mRecycler.getLayoutManager().getChildCount();
             int totalItemCount      = mRecycler.getLayoutManager().getItemCount();
-            int pastVisibleItems    = ((GridLayoutManager) mRecycler.getLayoutManager())
+            int firstVisibleItems    = ((GridLayoutManager) mRecycler.getLayoutManager())
                     .findFirstVisibleItemPosition();
 
-            if((visibleItemCount + pastVisibleItems) >= totalItemCount && !mFilmsPresenter.isLoading()) {
-                mFilmsPresenter.onEndListReached();
+            if (firstLoading) {
+                firstLoading = false;
+                return;
+            }
+
+            if((visibleItemCount + firstVisibleItems) >= totalItemCount && !mFilmsPresenter.isLoading()) {
+                mFilmsPresenter.onEndless();
             }
 
             // Is scrolling up

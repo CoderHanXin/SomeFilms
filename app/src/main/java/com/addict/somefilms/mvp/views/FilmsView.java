@@ -28,9 +28,13 @@ public interface FilmsView extends MvpView {
 
     void appendFilms(List<Film> filmList);
 
-    void showLoading ();
+    void showLoading();
 
-    void hideLoading ();
+    void hideLoading();
+
+    void showLoadingLabel();
+
+    void hideLoadingLabel();
 
     boolean isTheListEmpty();
 }
