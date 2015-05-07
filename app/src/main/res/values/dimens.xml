@@ -40,4 +40,10 @@
     <dimen name="item_height_normal">72dp</dimen>
     <dimen name="item_height_small">48dp</dimen>
     <dimen name="item_height_tiny">32dp</dimen>
+
+    <dimen name="icon_size_normal">72dp</dimen>
+    <dimen name="icon_size_small">48dp</dimen>
+    <dimen name="icon_size_tiny">32dp</dimen>
+
+    <dimen name="item_detail_card_margin">56dp</dimen>
 </resources>

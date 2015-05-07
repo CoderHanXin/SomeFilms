@@ -23,11 +23,17 @@ public interface FilmDetailView extends MvpView {
 
     void setTitle(String title);
 
-    void setSummary(String summary);
+    void setOriginalTitle(String title);
 
     void setGenres(String genres);
+
+    void setYear(String year);
+
+    void setCountries(String countries);
 
     void setRating(Float rating);
 
     void setFilmImage(String url);
+
+    void setSummary(String summary);
 }

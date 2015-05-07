@@ -59,7 +59,10 @@ public class FilmDetailPresenter extends presenter {
         showFilmImage(response.getImages());
         showTitle(response.getTitle());
         showSummary(response.getSummary());
+        showOriginalTitle(response.getOriginalTitle());
         showGenres(response.getGenres());
+        showYear(response.getYear());
+        showCountries(response.getCountries());
         showRating(response.getRating().getAverage());
     }
 
@@ -71,8 +74,8 @@ public class FilmDetailPresenter extends presenter {
         mFilmDetailView.setTitle(title);
     }
 
-    public void showSummary(String summary) {
-        mFilmDetailView.setSummary(summary);
+    public void showOriginalTitle(String originalTitle) {
+        mFilmDetailView.setOriginalTitle(originalTitle);
     }
 
     public void showGenres(List<String> genres) {
@@ -84,6 +87,25 @@ public class FilmDetailPresenter extends presenter {
             }
         }
         mFilmDetailView.setGenres(temp);
+    }
+
+    public void showYear(String year) {
+        mFilmDetailView.setYear(year);
+    }
+
+    public void showCountries(List<String> countries) {
+        String temp = "";
+        for (int i = 0; i < countries.size(); i++) {
+            temp += countries.get(i);
+            if (i != countries.size() - 1) {
+                temp += "/";
+            }
+        }
+        mFilmDetailView.setCountries(temp);
+    }
+
+    public void showSummary(String summary) {
+        mFilmDetailView.setSummary(summary);
     }
 
     public void showRating(Float rating) {

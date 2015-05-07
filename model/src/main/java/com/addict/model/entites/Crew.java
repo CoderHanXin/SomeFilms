@@ -24,7 +24,7 @@ import java.io.Serializable;
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-public class Cast implements Serializable {
+public class Crew implements Serializable {
 
     @Expose
     private Avatars avatars;

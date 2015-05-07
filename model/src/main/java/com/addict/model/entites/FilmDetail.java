@@ -73,7 +73,7 @@ public class FilmDetail implements Serializable {
     @Expose
     private List<String> countries = new ArrayList<String>();
     @Expose
-    private List<Cast> casts = new ArrayList<Cast>();
+    private List<Crew> casts = new ArrayList<Crew>();
     @SerializedName("current_season")
     @Expose
     private Number currentSeason;
@@ -85,7 +85,7 @@ public class FilmDetail implements Serializable {
     @Expose
     private String subtype;
     @Expose
-    private List<Director> directors = new ArrayList<Director>();
+    private List<Crew> directors = new ArrayList<Crew>();
     @SerializedName("comments_count")
     @Expose
     private Number commentsCount;
@@ -406,7 +406,7 @@ public class FilmDetail implements Serializable {
      * @return
      *     The casts
      */
-    public List<Cast> getCasts() {
+    public List<Crew> getCasts() {
         return casts;
     }
 
@@ -415,7 +415,7 @@ public class FilmDetail implements Serializable {
      * @param casts
      *     The casts
      */
-    public void setCasts(List<Cast> casts) {
+    public void setCasts(List<Crew> casts) {
         this.casts = casts;
     }
 
@@ -496,7 +496,7 @@ public class FilmDetail implements Serializable {
      * @return
      *     The directors
      */
-    public List<Director> getDirectors() {
+    public List<Crew> getDirectors() {
         return directors;
     }
 
@@ -505,7 +505,7 @@ public class FilmDetail implements Serializable {
      * @param directors
      *     The directors
      */
-    public void setDirectors(List<Director> directors) {
+    public void setDirectors(List<Crew> directors) {
         this.directors = directors;
     }
 

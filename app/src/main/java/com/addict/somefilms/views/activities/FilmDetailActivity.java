@@ -18,20 +18,25 @@ package com.addict.somefilms.views.activities;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.addict.somefilms.R;
+import com.addict.somefilms.model.ColorScheme;
 import com.addict.somefilms.mvp.presenters.FilmDetailPresenter;
 import com.addict.somefilms.mvp.views.FilmDetailView;
+import com.addict.somefilms.views.customs.FilmDetailCardLayout;
+import com.addict.somefilms.views.customs.FilmDetailInfoLayout;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -50,14 +55,24 @@ public class FilmDetailActivity extends Activity
     TextView mTitleTextView;
     @InjectView(R.id.summary_textView)
     TextView mSummaryTextView;
-    @InjectView(R.id.genres_textView)
-    TextView mGenresTextView;
     @InjectView(R.id.activity_detail_container)
     FrameLayout mActivityDetailContainer;
     @InjectView(R.id.ratingBar)
     RatingBar mRatingBar;
     @InjectView(R.id.rating_textView)
     TextView mRatingTextView;
+    @InjectView(R.id.details_original_title)
+    FilmDetailInfoLayout mDetailsOriginalTitle;
+    @InjectView(R.id.details_genres)
+    FilmDetailInfoLayout mDetailsGenres;
+    @InjectView(R.id.details_year)
+    FilmDetailInfoLayout mDetailsYear;
+    @InjectView(R.id.details_countries)
+    FilmDetailInfoLayout mDetailsCountries;
+    @InjectView(R.id.card_content)
+    LinearLayout mCardContent;
+    @InjectView(R.id.film_detail_card_details)
+    FilmDetailCardLayout mFilmDetailCardDetails;
 
     private FilmDetailPresenter mFilmDetailPresenter;
     private LayerDrawable mRatingBarLayer;
@@ -124,13 +139,48 @@ public class FilmDetailActivity extends Activity
     }
 
     @Override
-    public void setSummary(String summary) {
-        mSummaryTextView.setText(summary);
+    public void setOriginalTitle(String title) {
+        if (!TextUtils.isEmpty(title)) {
+            mDetailsOriginalTitle.setVisibility(View.VISIBLE);
+            mDetailsOriginalTitle.setContentText(title);
+        } else {
+            mDetailsOriginalTitle.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void setGenres(String genres) {
-        mGenresTextView.setText(genres);
+        if (!TextUtils.isEmpty(genres)) {
+            mDetailsGenres.setVisibility(View.VISIBLE);
+            mDetailsGenres.setContentText(genres);
+        } else {
+            mDetailsGenres.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setYear(String year) {
+        if (!TextUtils.isEmpty(year)) {
+            mDetailsYear.setVisibility(View.VISIBLE);
+            mDetailsYear.setContentText(year);
+        } else {
+            mDetailsYear.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setCountries(String countries) {
+        if (!TextUtils.isEmpty(countries)) {
+            mDetailsCountries.setVisibility(View.VISIBLE);
+            mDetailsCountries.setContentText(countries);
+        } else {
+            mDetailsCountries.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setSummary(String summary) {
+        mSummaryTextView.setText(summary);
     }
 
     @Override
@@ -147,33 +197,38 @@ public class FilmDetailActivity extends Activity
         mHeight = height / 3;
     }
 
-    public void setColorWithPalette(Palette palette) {
+    private void setColorWithPalette(Palette palette) {
         if (palette != null) {
-            final Palette.Swatch darkVibrantSwatch = palette.getDarkVibrantSwatch();
-            final Palette.Swatch darkMutedSwatch = palette.getDarkMutedSwatch();
-            final Palette.Swatch lightVibrantSwatch = palette.getLightVibrantSwatch();
-            final Palette.Swatch lightMutedSwathc = palette.getLightMutedSwatch();
-            final Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
-            final Palette.Swatch mutedSwatch = palette.getMutedSwatch();
+            Palette.Swatch primary = palette.getVibrantSwatch();
+            Palette.Swatch secondary = palette.getDarkVibrantSwatch();
+            Palette.Swatch tertiary = palette.getLightVibrantSwatch();
 
-            final Palette.Swatch backgroundColor = (darkVibrantSwatch != null) ? darkVibrantSwatch : darkMutedSwatch;
-            final Palette.Swatch titleColor = (lightVibrantSwatch != null) ? lightVibrantSwatch : lightMutedSwathc;
-            setBackgroundColors(backgroundColor);
-            setTitleColors(titleColor);
+            if (primary == null) {
+                primary = palette.getMutedSwatch();
+            }
+            if (secondary == null) {
+                secondary = palette.getDarkMutedSwatch();
+            }
+            if (tertiary == null) {
+                tertiary = palette.getLightMutedSwatch();
+            }
+
+            if (primary != null && secondary != null && tertiary != null) {
+
+                final ColorScheme scheme = new ColorScheme(
+                        primary.getRgb(),
+                        secondary.getRgb(),
+                        tertiary.getRgb(),
+                        primary.getTitleTextColor(),
+                        primary.getBodyTextColor());
+
+                setColors(scheme);
+            }
         }
     }
 
-    private void setBackgroundColors(Palette.Swatch swatch) {
-        mActivityDetailContainer.setBackgroundColor(swatch.getRgb());
-        mTitleTextView.setTextColor(swatch.getRgb());
-        mSummaryTextView.setTextColor(swatch.getTitleTextColor());
-        mGenresTextView.setTextColor(swatch.getTitleTextColor());
-        mRatingTextView.setTextColor(swatch.getTitleTextColor());
-        mRatingBarLayer.getDrawable(2).setColorFilter(swatch.getTitleTextColor(), PorterDuff.Mode.SRC_ATOP);
-
-    }
-
-    private void setTitleColors(Palette.Swatch swatch) {
-        mTitleTextView.setBackgroundColor(swatch.getRgb());
+    private void setColors(ColorScheme scheme) {
+        mTitleTextView.setBackgroundColor(scheme.primaryAccent);
+        mTitleTextView.setTextColor(scheme.primaryText);
     }
 }

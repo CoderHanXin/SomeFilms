@@ -42,45 +42,51 @@
                 android:id="@+id/title_textView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height_small"
+                android:paddingTop="@dimen/spacing_small"
+                android:paddingBottom="@dimen/spacing_small"
+                android:paddingLeft="@dimen/spacing_normal"
+                android:paddingRight="@dimen/spacing_normal"
                 android:layout_below="@+id/cover_imageView"
                 android:textSize="@dimen/font_larger"
                 android:gravity="center_vertical"
                 tools:text="Fast n Furious 7"
                 />
+            <TextView
+                android:id="@+id/summary_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/spacing_small"
+                android:paddingBottom="@dimen/spacing_small"
+                android:paddingLeft="@dimen/spacing_normal"
+                android:paddingRight="@dimen/spacing_normal"
+                android:layout_below="@id/title_textView"
+                android:maxLines="5"
+                android:ellipsize="end"
+                android:textSize="@dimen/font_normal"
+                tools:text="This is summary."
+                />
             <RatingBar
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/title_textView"
+                android:layout_below="@id/summary_textView"
                 android:numStars="5"
                 />
             <TextView
                 android:id="@+id/rating_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/item_height_small"
-                android:layout_below="@id/title_textView"
                 android:layout_toRightOf="@id/ratingBar"
+                android:layout_below="@id/summary_textView"
                 android:layout_marginLeft="@dimen/spacing_normal"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/font_larger"
                 tools:text="7.5"
                 />
-            <TextView
-                android:id="@+id/summary_textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ratingBar"
-                android:textSize="@dimen/font_large"
-                tools:text="This is summary."
-                />
-
-            <TextView
-                android:id="@+id/genres_textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/summary_textView"
-                android:textSize="@dimen/font_large"
-                tools:text="war/action"
+            <include layout="@layout/item_film_detail_detail"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_below="@id/ratingBar"
                 />
         </RelativeLayout>
     </ScrollView>
