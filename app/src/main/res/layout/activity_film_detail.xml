@@ -15,11 +15,13 @@
   ~ limitations under the License.
   -->
 
-<FrameLayout android:id="@+id/activity_detail_container"
-             xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
+<FrameLayout
+    android:id="@+id/activity_detail_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:internal="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     >
 
     <ScrollView
@@ -42,52 +44,106 @@
                 android:id="@+id/title_textView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height_small"
-                android:paddingTop="@dimen/spacing_small"
+                android:layout_below="@+id/cover_imageView"
+                android:gravity="center_vertical"
                 android:paddingBottom="@dimen/spacing_small"
                 android:paddingLeft="@dimen/spacing_normal"
                 android:paddingRight="@dimen/spacing_normal"
-                android:layout_below="@+id/cover_imageView"
+                android:paddingTop="@dimen/spacing_small"
                 android:textSize="@dimen/font_larger"
-                android:gravity="center_vertical"
                 tools:text="Fast n Furious 7"
                 />
+
             <TextView
                 android:id="@+id/summary_textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/spacing_small"
+                android:layout_below="@id/title_textView"
+                android:ellipsize="end"
+                android:maxLines="5"
                 android:paddingBottom="@dimen/spacing_small"
                 android:paddingLeft="@dimen/spacing_normal"
                 android:paddingRight="@dimen/spacing_normal"
-                android:layout_below="@id/title_textView"
-                android:maxLines="5"
-                android:ellipsize="end"
+                android:paddingTop="@dimen/spacing_small"
                 android:textSize="@dimen/font_normal"
                 tools:text="This is summary."
                 />
-            <RatingBar
-                android:id="@+id/ratingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+
+            <RelativeLayout
+                android:id="@+id/rating_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height_normal"
+                android:layout_marginBottom="@dimen/spacing_small"
                 android:layout_below="@id/summary_textView"
-                android:numStars="5"
-                />
-            <TextView
-                android:id="@+id/rating_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/item_height_small"
-                android:layout_toRightOf="@id/ratingBar"
-                android:layout_below="@id/summary_textView"
-                android:layout_marginLeft="@dimen/spacing_normal"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/font_larger"
-                tools:text="7.5"
+                >
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_normal"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:isIndicator="true"
+                    />
+
+                <TextView
+                    android:id="@+id/rating_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/item_height_small"
+                    android:layout_marginLeft="@dimen/spacing_normal"
+                    android:layout_toRightOf="@id/ratingBar"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/font_larger"
+                    tools:text="7.5"
+                    />
+            </RelativeLayout>
+
+            <include
+                layout="@layout/item_film_detail_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rating_layout"
                 />
-            <include layout="@layout/item_film_detail_detail"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_below="@id/ratingBar"
-                />
+
+            <com.addict.somefilms.views.customs.FilmDetailCardLayout
+                android:id="@+id/film_detail_casts_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/film_detail_details_card"
+                internal:title="@string/film_casts"
+                >
+
+                <LinearLayout
+                    android:id="@+id/card_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/spacing_small"
+                    android:paddingTop="@dimen/spacing_small"
+                    />
+
+            </com.addict.somefilms.views.customs.FilmDetailCardLayout>
+
+            <com.addict.somefilms.views.customs.FilmDetailCardLayout
+                android:id="@+id/film_detail_directors_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/film_detail_casts_card"
+                internal:title="@string/film_directors"
+                >
+
+                <LinearLayout
+                    android:id="@+id/directors_card_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/spacing_small"
+                    android:paddingTop="@dimen/spacing_small"
+                    />
+
+            </com.addict.somefilms.views.customs.FilmDetailCardLayout>
         </RelativeLayout>
     </ScrollView>
 </FrameLayout>

@@ -33,12 +33,12 @@ import java.util.List;
 /**
  * Created by CoderHanXin on 2015/05/07.
  */
-public class BaseFilmCrewAdapter extends BaseAdapter {
+public abstract class BaseFilmCrewAdapter extends BaseAdapter {
     private final View.OnClickListener mItemOnClickListener;
     private final Context mContext;
     private final List<Crew> mCrewList;
 
-    BaseFilmCrewAdapter(List<Crew> crewList, Context context, View.OnClickListener itemOnClickListener) {
+    public BaseFilmCrewAdapter(List<Crew> crewList, Context context, View.OnClickListener itemOnClickListener) {
         mCrewList =crewList;
         mContext = context;
         mItemOnClickListener = itemOnClickListener;
@@ -64,17 +64,21 @@ public class BaseFilmCrewAdapter extends BaseAdapter {
         if (view == null) {
             view = LayoutInflater.from(mContext).inflate(getLayoutId(), viewGroup, false);
         }
+
+        final Crew crew = getItem(position);
+
         final TextView title = (TextView) view.findViewById(R.id.textView_title);
-        title.setText(mCrewList.get(position).getName());
+        title.setText(crew.getName());
 
         final ImageView imageView = (ImageView) view.findViewById(R.id.imageView_poster);
         Picasso.with(mContext)
-                .load(mCrewList.get(position).getAvatars().getMedium())
+                .load(crew.getAvatars().getMedium())
                 .fit()
                 .centerCrop()
                 .into(imageView);
 
         view.setOnClickListener(mItemOnClickListener);
+        view.setTag(crew);
 
         return view;
     }

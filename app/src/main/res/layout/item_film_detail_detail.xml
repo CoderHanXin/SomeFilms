@@ -19,7 +19,7 @@
 <com.addict.somefilms.views.customs.FilmDetailCardLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:internal="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/film_detail_card_details"
+    android:id="@+id/film_detail_details_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     internal:title="@string/film_details"

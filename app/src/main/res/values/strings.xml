@@ -24,6 +24,8 @@
 
     <string name="see_more">See more</string>
 
+    <string name="film_directors">Directors</string>
+    <string name="film_casts">Casts</string>
     <string name="film_details">Details</string>
     <string name="film_details_original_title">Original Title</string>
     <string name="film_details_year">Year</string>

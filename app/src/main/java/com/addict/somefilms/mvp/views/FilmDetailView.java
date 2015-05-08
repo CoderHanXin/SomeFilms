@@ -16,6 +16,10 @@
 
 package com.addict.somefilms.mvp.views;
 
+import com.addict.model.entites.Crew;
+
+import java.util.List;
+
 /**
  * Created by CoderHanXin on 2015/04/29.
  */
@@ -25,15 +29,19 @@ public interface FilmDetailView extends MvpView {
 
     void setOriginalTitle(String title);
 
-    void setGenres(String genres);
+    void setGenres(List<String> genres);
 
     void setYear(String year);
 
-    void setCountries(String countries);
+    void setCountries(List<String> countries);
 
     void setRating(Float rating);
 
     void setFilmImage(String url);
 
     void setSummary(String summary);
+
+    void setCasts(List<Crew> crewList);
+
+    void setDirectors(List<Crew> crewList);
 }

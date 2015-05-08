@@ -53,7 +53,7 @@ public class FilmListActivity extends AppCompatActivity implements FilmsView {
     ProgressBar mProgressBar;
 
     private final static String BUNDLE_FILM_WRAPPER = "film_wrapper";
-    public final static String EXTRA_FILM_ID = "film_id";
+    public final static String EXTRA_FILM = "film";
 
     private FilmsPresenter mFilmsPresenter;
     private FilmsRecyclerAdapter mAdapter;
@@ -93,7 +93,7 @@ public class FilmListActivity extends AppCompatActivity implements FilmsView {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(FilmListActivity.this, FilmDetailActivity.class);
                 if (mAdapter.getFilmList().size() > 0) {
-                    intent.putExtra(EXTRA_FILM_ID, mAdapter.getFilmList().get(position).getId());
+                    intent.putExtra(EXTRA_FILM, mAdapter.getFilmList().get(position));
                     startActivity(intent);
                 }
             }
